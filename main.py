@@ -6,14 +6,30 @@ import binascii
 import machine
 import lora
 from config import dev_eui, app_eui, app_key
+import si7021
 
 # Connect to LoRaWAN
 n = lora.lora()
 n.connect(dev_eui, app_eui, app_key)
 
+# Connect sensor
+sensor = si7021.SI7021()
+
 def send_payload(data):
+    hum = 0
+    temp = 0
+    
+    # Hum & temp
+    try:
+        hum = sensor.getRH()
+        temp = sensor.readTemp()
+    except OSError as e:
+        print("Exception occured while measuring data")
+        print("errno: ", e.errno)
+        
     final = {
-        'resource_battery': 99,
+        'resource_hum': hum,
+        'resource_temp': temp,
         'resource_data': ujson.dumps(data)
     }
     n.send(ujson.dumps(final))

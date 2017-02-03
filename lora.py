@@ -1,5 +1,6 @@
-from network import LoRa
+import binascii
 import socket
+from network import LoRa
 from wrapper import LED
 
 class lora(object):
@@ -14,6 +15,10 @@ class lora(object):
         Connect device to LoRa.
         Set the socket and lora instances.
         """
+        
+        dev_eui = binascii.unhexlify(dev_eui)
+        app_eui = binascii.unhexlify(app_eui)
+        app_key = binascii.unhexlify(app_key)
         
         # Disable blue blinking and turn LED off
         LED.heartbeat(False)
@@ -63,5 +68,6 @@ class lora(object):
             if e.errno == 11:
                 print("Caught exception while sending")
         
+        LED.off()
         data = self.s.recv(64)
         print("Received data:", data)
