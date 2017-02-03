@@ -9,7 +9,7 @@ from config import dev_eui, app_eui, app_key
 import si7021
 
 # Connect to LoRaWAN
-n = lora.lora()
+n = lora.LORA()
 n.connect(dev_eui, app_eui, app_key)
 
 # Connect sensor

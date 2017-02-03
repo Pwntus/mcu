@@ -3,7 +3,7 @@ import socket
 from network import LoRa
 from wrapper import LED
 
-class lora(object):
+class LORA(object):
     'Wrapper class with credentials to connect to LoRa'
     
     # LoRa and socket instances
