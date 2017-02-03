@@ -67,6 +67,7 @@ class LORA(object):
         except OSError as e:
             if e.errno == 11:
                 print("Caught exception while sending")
+                print("errno: ", e.errno)
         
         LED.off()
         data = self.s.recv(64)
