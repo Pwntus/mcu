@@ -7,13 +7,37 @@ import machine
 import lora
 from config import dev_eui, app_eui, app_key
 import si7021
+from wrapper import LED
 
 # Connect to LoRaWAN
 n = lora.LORA()
 n.connect(dev_eui, app_eui, app_key)
 
+# LED status
+led = -1
+
 # Connect sensor
 sensor = si7021.SI7021()
+
+def handle_state(data):
+    global led
+    state = None
+
+    try:
+        state = ujson.loads(data)[0]
+    except ValueError as e:
+        print("Exception occured while parsing state")
+        return
+
+    print("Parsed state: ", state)
+
+    if (int(state['led']['desired']) > 0):
+        led = 1
+        LED.on()
+
+    if (int(state['led']['desired']) < 0):
+        led = -1
+        LED.off()
 
 def send_payload(data):
     hum = 0
@@ -30,9 +54,14 @@ def send_payload(data):
     final = {
         'resource_hum': hum,
         'resource_temp': temp,
+        'resource_led': led,
         'resource_data': ujson.dumps(data)
     }
-    n.send(ujson.dumps(final))
+    state = n.send(ujson.dumps(final))
+
+    if (len(state) > 0):
+        handle_state(state)
+
     time.sleep(10)
 
 count = 0

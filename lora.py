@@ -72,3 +72,5 @@ class LORA(object):
         LED.off()
         data = self.s.recv(64)
         print("Received data:", data)
+
+        return data

@@ -7,6 +7,9 @@ class LED(object):
     def heartbeat(state):
         pycom.heartbeat(state)
         
+    def on():
+        pycom.rgbled(0x00FF00)
+
     def off():
         pycom.rgbled(0x000000)
         
