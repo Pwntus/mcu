@@ -1,51 +1,39 @@
 # Packet format
 
-## FTTTTTTSSSSSDDDDD
+### FTTTTTTSSSSSDDDDD
 
 ### F `Packet format`
+Possible values:
 
->	Possible values:
-
->	0 - all sensors included
-
->	1 - temperature excluded
-
->	2 - wind speed excluded
-
->	3 - wind direction excluded
-
->	4 - only temperature
-
->	5 - only wind speed
-
->	6 - only wind direction
+	* 0 - all sensors included
+	* 1 - temperature excluded
+	* 2 - wind speed excluded
+	* 3 - wind direction excluded
+	* 4 - only temperature
+	* 5 - only wind speed
+	* 6 - only wind direction
 	
-### T `Temperature data`
+### T `Temperature`
+If included, always 6 bytes.
 
->	If included, always 6 bytes.
-
->	E.g. -10.22
+E.g. -10.22
 	
-### S `Wind speed`
+### S `Speed`
+If included, always 5 bytes.
 
->	If included, always 5 bytes.
-
->	E.g. 04.50 (m/s)
+E.g. 04.50 (m/s)
 	
-### D `Wind direction`
+### D `Direction`
+If included, always 5 bytes.
 
->	If included, always 5 bytes.
-
->	E.g. 45.87 (degrees)
+E.g. 45.87 (degrees)
 
 ### Max packet size: 17b
+E.g. 0-01.1503.0515.00
 
->	E.g. 0-01.1503.0515.00
-
->	All sensors included, -1.15°C, 3.05 m/s, 15 degrees
+All sensors included, -1.15°C, 3.05 m/s, 15 degrees
 
 ### Min packet size: 6b
+E.g. 645.15
 
->	E.g. 645.15
-
->	Only wind direction included, 45.15 degrees
+Only wind direction included, 45.15 degrees
