@@ -24,16 +24,16 @@ If included, always 5 bytes.
 E.g. 04.50 (m/s)
 	
 ### D `Direction`
-If included, always 5 bytes.
+If included, always 6 bytes.
 
-E.g. 45.87 (degrees)
+E.g. 145.87 (degrees)
 
-### Max packet size: 17b
-E.g. 0-01.1503.0515.00
+### Max packet size: 18b
+E.g. 0-01.1503.05015.00
 
 All sensors included, -1.15°C, 3.05 m/s, 15 degrees
 
 ### Min packet size: 6b
-E.g. 645.15
+E.g. 505.15
 
-Only wind direction included, 45.15 degrees
+Only wind speed included, 5.15 (m/s)
