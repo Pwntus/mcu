@@ -1,6 +1,6 @@
 # Packet format
 
-### FTTTTTTSSSSSDDDDD
+### FTTTTTTSSSSSDDDDDD
 
 ### F `Packet format`
 Possible values:
@@ -34,6 +34,7 @@ E.g. 0-01.1503.05015.00
 All sensors included, -1.15°C, 3.05 m/s, 15 degrees
 
 ### Min packet size: 6b
+
 E.g. 505.15
 
 Only wind speed included, 5.15 (m/s)

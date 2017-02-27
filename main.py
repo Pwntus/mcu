@@ -1,20 +1,15 @@
 import time
-import si7021
+import lora
+from config import dev_eui, app_eui, app_key
 
-# Connect sensor
-sensor = si7021.SI7021()
+# Connect to LoRaWAN
+n = lora.LORA()
+n.connect(dev_eui, app_eui, app_key)
 
 count = 0
 while True:
-    hum, temp = None
+    print("Cycle ", count)
+    count = count + 1
 
-    try:
-        hum = sensor.getRH()
-        temp = sensor.readTemp()
-    except OSError as e:
-        print("Exception occured while measuring data")
-        print("errno: ", e.errno)
-
-    print(hum, temp)
-
+    n.send('0022.6000.05240.45')
     time.sleep(10)
