@@ -1,15 +1,16 @@
 import time
-import lora
-from config import dev_eui, app_eui, app_key
-
-# Connect to LoRaWAN
-n = lora.LORA()
-n.connect(dev_eui, app_eui, app_key)
+from machine import Pin
 
 count = 0
-while True:
-    print("Cycle ", count)
-    count = count + 1
 
-    n.send('0022.6000.05240.45')
-    time.sleep(10)
+def pin_handler(arg):
+	global count
+	count = count + 1
+	print(count)
+
+speed = Pin('P12', mode = Pin.IN, pull = Pin.PULL_UP)
+
+speed.callback(Pin.IRQ_FALLING, pin_handler)
+
+while True:
+	pass
